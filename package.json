@@ -1,0 +1,33 @@
+{
+  "name": "ubrow",
+  "source": "src/index.ts",
+  "main": "dist/ubrow.js",
+  "module": "dist/ubrow.mjs",
+  "unpkg": "dist/ubrow.umd.js",
+  "types": "src/types/ubrow.d.ts",
+  "scripts": {
+    "build": "microbundle --external none --sourcemap false",
+    "dev": "microbundle watch --sourcemap false"
+  },
+  "dependencies": {
+    "urout": "^1.0.6"
+  },
+  "devDependencies": {
+    "microbundle": "^0.11.0",
+    "typescript": "~3.1.1"
+  },
+  "description": "Fast, unopinionated, minimalist client router ;)",
+  "version": "1.0.6",
+  "directories": {
+    "example": "examples"
+  },
+  "keywords": [
+    "API",
+    "browser",
+    "router",
+    "client",
+    "ubrow"
+  ],
+  "author": "Kethan Surana",
+  "license": "ISC"
+}
