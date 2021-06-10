@@ -1,9 +1,9 @@
 import { Emitter } from "./emitter";
 
 export class RHistory extends Emitter {
-    win: Window = null;
-    addEvent = null;
-    h: History = null;
+    win: any;
+    addEvent;
+    h: History;
     ctx: Window;
     constructor() {
         super();

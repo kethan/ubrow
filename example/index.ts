@@ -1,6 +1,5 @@
 import { Client } from "../src";
 
-
 let users = Client()
     .get('/', (req, res) => {
         console.log('users!');
@@ -29,9 +28,6 @@ app
     })
     .get('/about', (req, res) => {
         console.log('about');
-    })
-    .on('change', (location, req, stateType) => {
-         console.log(location, req, stateType);
     })
     .listen();
 

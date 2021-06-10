@@ -1,33 +1,48 @@
 {
-  "name": "ubrow",
-  "source": "src/index.ts",
-  "main": "dist/ubrow.js",
-  "module": "dist/ubrow.mjs",
-  "unpkg": "dist/ubrow.umd.js",
-  "types": "src/types/ubrow.d.ts",
-  "scripts": {
-    "build": "microbundle --external none --sourcemap false",
-    "dev": "microbundle watch --sourcemap false"
-  },
-  "dependencies": {
-    "urout": "^1.0.6"
-  },
-  "devDependencies": {
-    "microbundle": "^0.11.0",
-    "typescript": "~3.1.1"
-  },
-  "description": "Fast, unopinionated, minimalist client router ;)",
-  "version": "1.0.6",
-  "directories": {
-    "example": "examples"
-  },
-  "keywords": [
-    "API",
-    "browser",
-    "router",
-    "client",
-    "ubrow"
-  ],
-  "author": "Kethan Surana",
-  "license": "ISC"
+	"name": "ubrow",
+	"description": "Fast, unopinionated, minimalist client router",
+	"version": "2.0.0",
+	"source": "src/index.ts",
+	"main": "./dist/ubrow.umd.js",
+	"module": "./dist/ubrow.es.js",
+	"unpkg": "./dist/ubrow.umd.js",
+	"types": "./index.d.ts",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"serve": "vite preview"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/urout.es.js",
+			"require": "./dist/urout.umd.js"
+		}
+	},
+	"dependencies": {
+		"urout": "^2.0.0"
+	},
+	"devDependencies": {
+		"typescript": "^4.3.2",
+		"vite": "^2.3.7"
+	},
+	"directories": {
+		"example": "examples"
+	},
+	"keywords": [
+		"API",
+		"browser",
+		"router",
+		"client",
+		"ubrow"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kethan/ubrow.git"
+	},
+	"author": "Kethan Surana",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/kethan/ubrow/issues"
+	},
+	"homepage": "https://github.com/kethan/ubrow#readme"
 }

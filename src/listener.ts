@@ -1,26 +1,11 @@
+import { Request, Response } from "urout";
 import { RHistory } from "./history";
-
-export interface Request {
-    method: string;
-    url: string;
-    search?: string;
-    query?: string;
-    pathname?: string;
-    path?: string;
-}
-
-export interface Response {
-    statusCode: number;
-    finished: boolean,
-    end(chunk: any, cb?: Function);
-}
-type Callback = (req: Request, res: Response) => void;
-
 export class Listener {
+
     private history: RHistory = new RHistory();
-    private base: string = null;
+    private base: string = '';
     private rgx: RegExp;
-    private req: Request = null;
+    private req: Request | undefined;
     private res: Response = {
         statusCode: 200,
         finished: false,
@@ -43,11 +28,11 @@ export class Listener {
         this.history.pushState(this.req, '', url)
     }
 
-    on(event: string, callback: Callback) {
+    on(event: string, callback) {
         this.history.on(event, callback);
     }
 
-    setCallback = (callback: Callback) => {
+    private setCallback = (callback) => {
         let path = location && location.pathname + location.search || '/';
         if (this.base != '/') {
             path = path.replace(this.base, '');
@@ -59,7 +44,7 @@ export class Listener {
         callback(this.req, this.res);
     }
 
-    listen(callback: Callback) {
+    listen(callback) {
         this.setCallback(callback);
         addEventListener('click', (e: any) => {
             var x = e.target.closest('a'), y = x && x.getAttribute('href');
@@ -71,7 +56,7 @@ export class Listener {
             }
         });
 
-        this.history.on('change', (location, state, source) => {
+        this.history.on('change', (location: any, state: any, source: any) => {
             this.setCallback(callback);
         });
     }

@@ -1,31 +1,28 @@
 {
     "compilerOptions": {
-        "moduleResolution": "node",
-        "target": "es5",
-        "module": "es2015",
-        "lib": [
-            "es2015",
-            "es2016",
-            "es2017",
-            "dom"
-        ],
-        "noImplicitAny": false,
-        "sourceMap": false,
-        "declaration": true,
-        "allowSyntheticDefaultImports": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "declarationDir": "dist/types",
-        "outDir": "dist",
-        "types": [
-            "node"
-        ],
-        "typeRoots": [
-            "node_modules/@types",
-            "src/types"
-        ]
+      "target": "ES5",
+      "module": "ES2015",
+      "lib": [
+        "ESNext",
+        "DOM"
+      ],
+      "moduleResolution": "Node",
+      "strict": true,
+      "sourceMap": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      // "noEmit": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": false,
+      "noImplicitReturns": true,
+      "declaration": true,
+      "emitDeclarationOnly": true,
+      "outDir": "dist",
+      "noImplicitAny": false
     },
     "include": [
-        "src"
+      "src/*.ts",
+      "src/*.d.ts",
+      "index.d.ts"
     ]
-}
+  }
