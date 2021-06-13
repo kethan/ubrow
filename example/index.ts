@@ -1,8 +1,8 @@
 import { Client } from "../src";
 
 let users = Client()
-    .get('/', (req, res) => {
-        console.log('users!');
+    .get('/:id', (req, res) => {
+        console.log('users!', req.params.id);
     })
 
 let app = Client({
@@ -15,7 +15,7 @@ let app = Client({
 
 app
     .use((req, res, next) => {
-        console.log('mid');
+        console.log('Root middleware');
         next()
     })
     .use('users', users)
@@ -24,10 +24,13 @@ app
     })
     .get('/one', (req, res) => {
         throw 'e';
-        console.log('one');
     })
     .get('/about', (req, res) => {
-        console.log('about');
+        console.log('about', req.query);
+    })
+    .on('change', (a ,b ,c) => {
+        console.log(a,b,c);
+        
     })
     .listen();
 
