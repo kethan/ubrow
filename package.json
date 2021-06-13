@@ -1,7 +1,7 @@
 {
 	"name": "ubrow",
 	"description": "Fast, unopinionated, minimalist client router",
-	"version": "2.0.1",
+	"version": "2.0.3",
 	"source": "./src/index.ts",
 	"main": "./dist/ubrow.umd.js",
 	"module": "./dist/ubrow.es.js",
@@ -19,7 +19,7 @@
 		}
 	},
 	"dependencies": {
-		"urout": "^2.0.0"
+		"urout": "^2.0.4"
 	},
 	"devDependencies": {
 		"typescript": "^4.3.2",

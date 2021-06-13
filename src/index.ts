@@ -1,6 +1,6 @@
-import { Router, Opts } from "urout";
+import { Router, IOptions } from "urout";
 import { Listener } from "./listener";
-interface ClientOpts extends Opts {
+interface ClientOpts extends IOptions {
     base?: string;
 }
 class UBrow extends Router {

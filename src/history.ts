@@ -1,5 +1,4 @@
 import { Emitter } from "./emitter";
-
 export class RHistory extends Emitter {
     win: any;
     addEvent;

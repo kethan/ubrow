@@ -2,25 +2,28 @@
 
 **Start broswer apps in seconds** ✨
 
-Fast, unopinionated, minimalist client router;)
+Fast, unopinionated, minimalist client router
 
-A client router based on [```urout```](https://github.com/kethan/urout)
+A client router based on [`urout`](https://github.com/kethan/urout)
 
 # Features
 
-* **Lightweight** - 2.5kb min+gzip
-* **No Dependency** - No Bloating. No external dependencies
-* **Express.js identical API** - Nearly identical application API & route pattern definitions
+-   **Lightweight** - 2.5kb min+gzip
+-   **No Dependency** - No Bloating. No external dependencies
+-   **Express.js identical API** - Nearly identical application API & route pattern definitions
 
 # Install
+
 ```
 $ npm install --save ubrow
 or
 https://unpkg.com/ubrow
 ```
+
 # Usage
 
 index.html
+
 ```html
 <base href="/">
 <ul>
@@ -33,8 +36,8 @@ index.html
 <script src="https://unpkg.com/ubrow"></script>
 <script>
 let users = ubrow.Client()
-    .get('/', (req, res) => {
-        console.log('users!');
+    .get('/:id', (req, res) => {
+        console.log('users!', req.params.id);
     })
 
 let app = ubrow.Client({
@@ -47,7 +50,7 @@ let app = ubrow.Client({
 
 app
     .use((req, res, next) => {
-        console.log('mid');
+        console.log('Root middleware');
         next()
     })
     .use('users', users)
@@ -56,21 +59,21 @@ app
     })
     .get('/one', (req, res) => {
         throw 'e';
-        console.log('one');
     })
     .get('/about', (req, res) => {
-        console.log('about');
+        console.log('about', req.query);
     })
-    .on('change', (location, req, stateType) => {
-         console.log(location, req, stateType);
+    .on('change', (a ,b ,c) => {
+        console.log(a,b,c);
+
     })
     .listen();
 
 setTimeout(() => {
     app.navigate('/one');
 }, 5000);
-</script>
 ```
+
 # API
 
 # License

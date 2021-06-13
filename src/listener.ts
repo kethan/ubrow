@@ -1,7 +1,6 @@
-import { Request, Response } from "urout";
+import { Middleware, Request, Response } from "urout";
 import { RHistory } from "./history";
 export class Listener {
-
     private history: RHistory = new RHistory();
     private base: string = '';
     private rgx: RegExp;
@@ -44,7 +43,7 @@ export class Listener {
         callback(this.req, this.res);
     }
 
-    listen(callback) {
+    listen(callback: Middleware<Request>) {
         this.setCallback(callback);
         addEventListener('click', (e: any) => {
             var x = e.target.closest('a'), y = x && x.getAttribute('href');
