@@ -14,6 +14,10 @@ class UBrow extends Router {
         this.client.listen(this.handler);
     }
 
+    unListen() {
+        this.client.unListen();
+    }
+
     on(event: string, callback) {
         this.client.on(event, callback)
         return this;

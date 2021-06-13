@@ -4,6 +4,10 @@ export class RHistory extends Emitter {
     addEvent;
     h: History;
     ctx: Window;
+    listen =  (e) => {
+        this.emit('popstate', e)
+        this.emit('change', this.ctx.location, this.h.state, 'popstate')
+    };
     constructor() {
         super();
         this.win = typeof window == 'object' && window;
@@ -14,10 +18,7 @@ export class RHistory extends Emitter {
         this.addEvent = this.ctx.addEventListener;
 
         if (this.addEvent) {
-            this.ctx.addEventListener('popstate', (e) => {
-                this.emit('popstate', e)
-                this.emit('change', this.ctx.location, this.h.state, 'popstate')
-            });
+            this.ctx.addEventListener('popstate', this.listen);
         }
     }
 
@@ -31,5 +32,9 @@ export class RHistory extends Emitter {
         this.emit('replaceState', state, title, url);
         this.h.replaceState(state, title, url);
         this.emit('change', this.ctx.location, state, 'replaceState');
+    }
+
+    unListen() {
+        this.ctx.removeEventListener('popstate', this.listen);
     }
 }

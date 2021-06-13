@@ -6,6 +6,7 @@ declare class UBrow extends Router {
     private client;
     constructor(opts: ClientOpts);
     listen(): void;
+    unListen(): void;
     private on(event: string, callback: (location: Location, req: Request, stateType: string) => {}): this;
     navigate(url: string): void;
 }

@@ -57,20 +57,25 @@ app
     .get('/', (req, res) => {
         console.log('root');
     })
-    .get('/one', (req, res) => {
+    .get('/error', (req, res) => {
         throw 'e';
     })
     .get('/about', (req, res) => {
         console.log('about', req.query);
     })
-    .on('change', (a ,b ,c) => {
-        console.log(a,b,c);
+    .on('change', (a, b, c) => {
+        console.log(a, b, c);
 
     })
     .listen();
 
 setTimeout(() => {
-    app.navigate('/one');
+    app.navigate('/error')
+}, 1000);
+
+setTimeout(() => {
+    app.unListen();
+    console.log('unlisten!');
 }, 5000);
 ```
 
