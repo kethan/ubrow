@@ -5,7 +5,7 @@ interface ClientOpts extends IOptions {
 declare class UBrow extends Router {
     private client;
     constructor(opts: ClientOpts);
-    listen(): void;
+    listen({onError, onNoMatch}?: {onError?: ErrorHandler, onNoMatch?: Middleware}): void;
     unListen(): void;
     private on(event: string, callback: (location: Location, req: Request, stateType: string) => {}): this;
     navigate(url: string): void;
