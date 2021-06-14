@@ -5,6 +5,7 @@ export class Listener {
     private base: string = '';
     private rgx: RegExp;
     private req: Request | undefined;
+
     private res: Response = {
         statusCode: 200,
         finished: false,
@@ -12,9 +13,11 @@ export class Listener {
             if (chunk) {
                 console.error(chunk);
             }
+        },
+        redirect: (path) => {
+            this.navigate(path);
         }
     }
-
     private click = (e: any) => {
         var x = e.target.closest('a'), y = x && x.getAttribute('href');
         if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey || e.button || e.defaultPrevented) return;

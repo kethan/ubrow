@@ -25,58 +25,55 @@ https://unpkg.com/ubrow
 index.html
 
 ```html
-<base href="/">
+<base href="/" />
 <ul>
-    <li><a href="./">/home</a></li>
-    <li><a href="./about?q=10">/about</a></li>
-    <li><a href="./one">/one</a></li>
-    <li><a href="./users/">/users</a></li>
-    <li><a href="./nomatch">/not found</a></li>
+	<li><a href="./">/home</a></li>
+	<li><a href="./about?q=10">/about</a></li>
+	<li><a href="./error">/one</a></li>
+	<li><a href="./users/someone">/users</a></li>
+	<li><a href="./nomatch">/not found</a></li>
 </ul>
 <script src="https://unpkg.com/ubrow"></script>
 <script>
-let users = ubrow.Client()
-    .get('/:id', (req, res) => {
-        console.log('users!', req.params.id);
-    })
+	let users = ubrow.Client().get("/:id", (req, res) => {
+		console.log("users!", req.params.id);
+	});
 
-let app = ubrow.Client({
-    onError: (err, req, res) => {
-        res.end(err);
-    }, onNoMatch: (req, res, next) => {
-        res.end("no match");
-    }
-});
+	let app = ubrow.Client({
+		onError: (err, req, res) => {
+			res.end(err);
+		},
+		onNoMatch: (req, res, next) => {
+			res.end("no match");
+		},
+	});
 
-app
-    .use((req, res, next) => {
-        console.log('Root middleware');
-        next()
-    })
-    .use('users', users)
-    .get('/', (req, res) => {
-        console.log('root');
-    })
-    .get('/error', (req, res) => {
-        throw 'e';
-    })
-    .get('/about', (req, res) => {
-        console.log('about', req.query);
-    })
-    .on('change', (a, b, c) => {
-        console.log(a, b, c);
+	app.use((req, res, next) => {
+		console.log("Root middleware");
+		next();
+	})
+		.use("users", users)
+		.get("/", (req, res) => {
+			console.log("root");
+		})
+		.get("/error", (req, res) => {
+			throw "e";
+		})
+		.get("/about", (req, res) => {
+			console.log("about", req.query);
+			res.redirect("/"); // Redirect to root again
+		})
+		.listen();
 
-    })
-    .listen();
+	setTimeout(() => {
+		app.navigate("/error");
+	}, 1000);
 
-setTimeout(() => {
-    app.navigate('/error')
-}, 1000);
-
-setTimeout(() => {
-    app.unListen();
-    console.log('unlisten!');
-}, 5000);
+	setTimeout(() => {
+		app.unListen();
+		console.log("unlisten!");
+	}, 5000);
+</script>
 ```
 
 # API

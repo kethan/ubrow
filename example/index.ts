@@ -27,14 +27,15 @@ app
     })
     .get('/about', (req, res) => {
         console.log('about', req.query);
+        res.redirect('/'); // Redirect to root again
     })
     .listen();
 
 setTimeout(() => {
-    app.navigate('/error')
+    // app.navigate('/error')
 }, 1000);
 
 setTimeout(() => {
-    app.unListen();
+    // app.unListen();
     console.log('unlisten!');
 }, 5000);
