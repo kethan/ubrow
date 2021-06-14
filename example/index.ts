@@ -1,19 +1,16 @@
 import { Client } from "../src";
 
-let users = Client()
+let errorListener = {
+    onError: (err, req, res) => console.log('listen err', err),
+    onNoMatch: (req, res, next) => console.log('nomatch')
+};
+
+let users = Client(errorListener)
     .get('/:id', (req, res) => {
         console.log('users!', req.params.id);
     })
 
-let app = Client({
-    onError: (err, req, res) => {
-        res.end(err);
-    }, onNoMatch: (req, res, next) => {
-        res.end("no match");
-    }
-});
-
-app
+let app = Client()
     .use((req, res, next) => {
         console.log('Root middleware');
         next()
@@ -29,7 +26,7 @@ app
         console.log('about', req.query);
         res.redirect('/'); // Redirect to root again
     })
-    .listen();
+    .listen(errorListener);
 
 setTimeout(() => {
     // app.navigate('/error')

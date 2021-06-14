@@ -5,12 +5,18 @@ interface ClientOpts extends IOptions {
 }
 class UBrow extends Router {
     private client: Listener;
-    constructor(opts: ClientOpts) {
+    onError;
+    onNoMatch;
+    constructor(private opts: ClientOpts) {
         super(opts);
-        this.client = new Listener(opts.base);
+        this.onError = opts.onError;
+        this.onNoMatch = opts.onNoMatch;
+        this.client = new Listener(this.opts.base);
     }
 
-    listen() {
+    listen({ onError = this.onError, onNoMatch = this.onNoMatch } = {}) {
+        this.onError = onError;
+        this.onNoMatch = onNoMatch;
         this.client.listen(this.handler);
     }
 

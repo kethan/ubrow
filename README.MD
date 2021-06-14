@@ -35,23 +35,20 @@ index.html
 </ul>
 <script src="https://unpkg.com/ubrow"></script>
 <script>
-	let users = ubrow.Client().get("/:id", (req, res) => {
+	let errorListener = {
+		onError: (err, req, res) => console.log("err", err),
+		onNoMatch: (req, res, next) => console.log("nomatch"),
+	};
+
+	let users = ubrow.Client(errorListener).get("/:id", (req, res) => {
 		console.log("users!", req.params.id);
 	});
 
-	let app = ubrow.Client({
-		onError: (err, req, res) => {
-			res.end(err);
-		},
-		onNoMatch: (req, res, next) => {
-			res.end("no match");
-		},
-	});
-
-	app.use((req, res, next) => {
-		console.log("Root middleware");
-		next();
-	})
+	let app = Client()
+		.use((req, res, next) => {
+			console.log("Root middleware");
+			next();
+		})
 		.use("users", users)
 		.get("/", (req, res) => {
 			console.log("root");
@@ -63,10 +60,10 @@ index.html
 			console.log("about", req.query);
 			res.redirect("/"); // Redirect to root again
 		})
-		.listen();
+		.listen(errorListener);
 
 	setTimeout(() => {
-		app.navigate("/error");
+		app.navigate('/error')
 	}, 1000);
 
 	setTimeout(() => {
